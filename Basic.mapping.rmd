@@ -1,0 +1,71 @@
+---
+title: "Basic Mapping Exercise "
+author: "Sarah Krueger"
+date: "10/18/2021"
+output: html_document
+---
+```{r Packages, message=FALSE, warning=FALSE}
+install.packages('pacman')
+pacman::p_load("ggsn","leaflet","mapdata","maptools","OpenStreetMap","rgdal","tidyverse", "ggplot")
+library(broom)
+library(ggplot2)
+library(ggmap)
+```
+
+<body style="background-color:pink;">
+
+
+##Simple Map 
+
+For my simple map, I have constructed a visual representation of one of our study sites in Kentucky. The point represents the latitude and longitude where bat captures were conducted and the county is shaded in pink. 
+
+```{r Simple Map Data, message=FALSE, warning=FALSE}
+state <- map_data("state")
+county <- map_data("county")
+bat.point <- data.frame("x" = -87.6534, "y" = 36.6401)
+```
+
+```{r Simple Map Filtered Data, message=FALSE, warning=FALSE}
+ky <- county %>% 
+  filter(region=="kentucky")
+
+christianco <- county %>% 
+  filter(region=="kentucky") %>% 
+  filter(subregion=="christian")
+```
+
+```{r Locator Map, message=FALSE, warning=FALSE}
+ggplot() + geom_polygon(data = state, aes(x=long, y = lat, group = group),
+                        fill = "white", color="black") + 
+           geom_polygon(data = ky, aes(x=long, y = lat, group = group),
+                        fill = "gray", color="black") + 
+           geom_polygon(data = christianco, aes(x=long, y = lat, group = group),
+                        fill = "pink", color="black") + 
+           geom_point(data = bat.point, aes(x=x,y=y), color="black", size = 3) +
+  coord_fixed(xlim = c(-90, -81),  ylim = c(36, 40), ratio = 1.2) + 
+  xlab("Longitude") + ylab("Latitude") + ggtitle("Site 83A, Christian Co., KY")
+```
+
+## Interactive Map
+
+```{r Campus Imagery, message=FALSE, warning=FALSE}
+ky.map <- openmap(c(39.4394444444,-89.8230555556),
+                     c(36.4311111111,-81.82), type='bing')
+
+KY <- openproj(ky.map, projection = "+proj=longlat +ellps=WGS84 +units=m +no_defs")
+```
+
+```{r Simple Map, fig.height=8, fig.width=10, message=FALSE, warning=FALSE}
+
+ky.sites <- read.csv("ky.sites.csv")
+
+autoplot.OpenStreetMap(ky.map) +
+  geom_point(data=ky.sites, aes(x = lat, y = long, color=site))+
+  geom_text(data=ky.sites,aes(x=lat,y=long,label=site), color="black", vjust=-0.60, size=4.01, fontface="bold") +
+  geom_text(data=ky.sites,aes(x=lat,y=long,label=site), color="white", vjust=-0.75, fontface="bold") +
+  labs(x="Longtiude", y="Latitude") + theme(legend.position = "none")
+```
+
+
+
+
