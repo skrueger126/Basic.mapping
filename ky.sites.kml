@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>ky.sites.kml</name>
+	<open>1</open>
+	<StyleMap id="failed11">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#failed3</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#failed01</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="failed3">
+	</Style>
+	<StyleMap id="failed1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#failed0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#failed</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="failed">
+	</Style>
+	<Style id="failed01">
+	</Style>
+	<Style id="failed0">
+	</Style>
+	<Placemark>
+		<name>10A</name>
+		<styleUrl>#failed11</styleUrl>
+		<Point>
+			<coordinates>-87.7942,36.7122,0</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>83A</name>
+		<LookAt>
+			<longitude>-87.68555519259945</longitude>
+			<latitude>36.69778198491807</latitude>
+			<altitude>0</altitude>
+			<heading>-0.02526967481715638</heading>
+			<tilt>44.26699925530151</tilt>
+			<range>27345.34454510731</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#failed1</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>-87.6534,36.6401,0</coordinates>
+		</Point>
+	</Placemark>
+</Document>
+</kml>
